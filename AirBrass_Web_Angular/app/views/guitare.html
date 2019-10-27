@@ -1,0 +1,116 @@
+<div  ng-init="getlisteAllGuitares()">
+    <div style="background-image: url(/images/pan_lead_guitar.jpg); height: 100px;text-align: center;">
+     <div>
+        <div>
+            <h2 style="color: white; float: left; padding: 12px" >Guitares</h2>
+        </div>
+        <div>
+           <h4 style="color: white; float: right; padding: 30px"><a href="#!/">Home</a><label>/</label>Guitares</h4>
+       </div>
+   </div>   
+
+</div>
+
+<div class="prdt"> 
+    <div class="prdt-top">
+        <div class="col-md-3 prdt-left">
+            <div class="w_sidebar">
+                <section  class="sky-form">
+                    <h4>Catégories</h4>
+                    <div class="row1 scroll-pane" style="height: auto">
+                        <div class="col col-4" ng-model='search.dtoSpecialisationProduit.intitule'  >
+                            <div class="list-group">
+                                <ul ng-repeat="s in listeAllSpecsGuitare| orderBy:'-intitule':true"  >
+                                    <li><a class="list-group-item" href="" ng-click="alerteRouge(s)">{{s.intitule}}</a></li>
+                                </ul>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section  class="sky-form">
+                    <h4>Marques</h4>
+                    <div class="row1 row2 scroll-pane">
+                        <div class="col col-4"  >
+                            <label class="checkbox" ng-repeat="marque in listeAllMarqueGuitare | unique: marque">
+                                <input type="checkbox" data-checklist-model="verbs" data-checklist-value="marque.intitule" ng-click="updateListArticle(marque)"><i></i> {{marque.intitule}}
+                            </label>
+                        </div>
+                    </div>
+                </section>
+                <section class="sky-form" >
+                    <h4>Prix</h4>
+                    <div class="row1 row2 scroll-pane">
+                        <div class="col col-4">
+                            <label class="radio"><input type="radio" name="radio" ng-click="updateListPrix(0,100)"><i></i>< 100€</label>
+                            <label class="radio"><input type="radio" name="radio" ng-click="updateListPrix(100,250)"><i></i>100€ < 250€</label>
+                            <label class="radio"><input type="radio" name="radio" ng-click="updateListPrix(250,500)"><i></i>250€ < 500€</label>
+                            <label class="radio"><input type="radio" name="radio" ng-click="updateListPrix(500,1000)"><i></i>500€ < 1000€</label>
+                            <label class="radio"><input type="radio" name="radio" ng-click="updateListPrix(1000,150000)"><i></i>> 1000€</label>
+                        </div>
+                    </div>                      
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 prdt-right">
+
+        <div class="product-one"  >	
+            <div  ng-repeat="x in listeRecherche | filter : search | startFrom:currentPage*pageSize | limitTo:pageSize">
+            <div class="col-md-4">				
+                    <div class="product-left p-left" style="padding-bottom: 150px" >
+                        <div class="product-main simpleCart_shelfItem" >
+                            <a href="" ng-click="openSingle(x.id)" class="mask"><img class="img-responsive zoom-img" ng-Src="{{x.photo}}" alt="" /></a>
+                            <div class="product-bottom">
+
+                            </div>
+                            <div class="srch srch1" ng-if="x.dtoPromotion">
+                                <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'">-10%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'">-20%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'">-30%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'">-40%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'">-50%</span>
+                            </div>
+                            <div style="margin-top: 70px ;height: 60px">
+                                <h5>{{x.intitule}}</h5>
+                                <h4 ng-if="!x.dtoPromotion"><a class="" href="#"><i></i></a> <span class=" item_price">{{x.prix |currency:''}} €</span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.9 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.8 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.7 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.6 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.5 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                {{x.message}}
+                            </div>
+                            <div style="text-align: center">
+
+                                <div class="submit-btn">
+                                    <input type="submit" name="" value="Ajouter au panier" ng-click="addOne(x)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</div>
+
+
+
+

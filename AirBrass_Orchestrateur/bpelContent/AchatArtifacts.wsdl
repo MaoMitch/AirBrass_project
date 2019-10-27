@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="fr.afcepf.al30.airbrass.orchestrateur" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://banque.al30.afcepf.fr" xmlns:wsdl1="http://airbrass.stock.al30.afcepf.fr" name="Achat" targetNamespace="fr.afcepf.al30.airbrass.orchestrateur">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of types participating in this BPEL process 
+     The BPEL Designer will generate default request and response types
+     but you can define or import any XML Schema type and use them as part 
+     of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="Banque">
+    <plnk:role name="Banque" portType="wsdl:banque"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="Stock">
+    <plnk:role name="Stock" portType="wsdl1:stock"/>
+  </plnk:partnerLinkType>
+    <import location="Banque.wsdl" namespace="http://banque.al30.afcepf.fr"/>
+    <import location="Stock.wsdl" namespace="http://airbrass.stock.al30.afcepf.fr"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="fr.afcepf.al30.airbrass.orchestrateur">
+
+            <element name="AchatRequest">
+                <complexType>
+                    <sequence>
+                    	<element name="jsonCommande" type="string"/>
+                    	<element name="jsonCB" type="string"/>
+                    	<element name="jsonCompte" type="string"/>
+                    	<element name="prix" type="double"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="AchatResponse">
+                <complexType>
+                    <sequence>
+                    	<element name="commentaire" type="string"/>
+                    	<element name="listeArticle" type="string"/>
+                    </sequence>
+                </complexType>
+            </element>
+        
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     MESSAGE TYPE DEFINITION - Definition of the message types used as 
+     part of the port type defintions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="AchatRequestMessage">
+        <part element="tns:AchatRequest" name="payload"/>
+    </message>
+    <message name="AchatResponseMessage">
+        <part element="tns:AchatResponse" name="payload"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the Achat BPEL process -->
+    <portType name="Achat">
+        <operation name="process">
+            <input message="tns:AchatRequestMessage"/>
+            <output message="tns:AchatResponseMessage"/>
+        </operation>
+    </portType>   
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="Achat">
+        <plnk:role name="AchatProvider" portType="tns:Achat"/>
+    </plnk:partnerLinkType>
+    
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     BINDING DEFINITION - Defines the message format and protocol details
+     for a web service.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <binding name="AchatBinding" type="tns:Achat">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    	<operation name="process">
+    		<soap:operation soapAction="fr.afcepf.al30.airbrass.orchestrateur/process"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    </binding>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="AchatService">
+    	<port binding="tns:AchatBinding" name="AchatPort">
+    		<soap:address location="http://localhost:18080/ode/processes/Achat"/>
+    	</port>
+    </service>
+</definitions>

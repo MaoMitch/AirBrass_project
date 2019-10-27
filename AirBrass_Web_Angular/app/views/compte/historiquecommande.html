@@ -1,0 +1,73 @@
+<div class="row" ng-controller="HistoriqueCommandeCtrl" ng-init="displayCommand()" style=" padding: 0% 10% 0% 10%;">
+
+<div class="span12 row-fluid">
+        <!-- START TABLE -->
+        <div>
+            <table class="table table-hover table-condensed table-striped">
+                <thead class="levelOne">
+                    <tr>
+                        <th class="th">Numéro de commande</th>
+                        <th class="th">Date de commande</th>
+                        <th class="th">Prix</th>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="commande in listCommand" data-ng-switch on="dayDataCollapse[$index]">
+                    <tr class="clickableRow"  data-ng-click="selectTableRow($index, commande.id)" >
+                        <td>{{commande.numero}}</td>
+                        <td>{{commande.date| date:'mediumDate'}} </td>
+                        <td ng-init="getPrice(commande)">   {{commande.prix| currency:"€"}}</td>
+                    </tr>
+                    <tr data-ng-switch-when="true">
+                        <td colspan="9">
+                            <div class="span9">
+                                <div>
+                                    <table class="table table-hover table-condensed table-striped">
+                                        <thead class="levelTwo">
+                                            <tr>
+                                                <th></th>
+                                                <th>Nom du produit</th>
+                                                <th>Quantité</th>
+                                                <th>Prix</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr data-ng-repeat="article in listCommand[$index].dtoLigneCommandes" ng-click="openSingle(article.dtoProduit.id)">
+                                                <td>
+                                                    <img ng-Src="{{article.dtoProduit.photo}}" data-imagezoom="false" 
+                                                         class="img-responsive" alt="" height="100" width="100" />
+                                                </td>
+                                                <td>{{article.dtoProduit.intitule}}</td>
+                                                <td>{{article.quantite}}</td>
+                                                <td>{{article.dtoProduit.prix | currency:"€"}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END TABLE -->
+    </div>
+     <!-- 
+    <table class="table">
+        <tr class="tr">
+            <th class="th">Numéro de commande</th>
+            <th class="th">Date de commande</th>
+            <th class="th">Prix</th>
+        </tr>
+        <tr>
+            <td>{{message}}</td>
+            <td> </td>
+            <td> </td>
+        </tr>
+        <tr ng-repeat="commande in listCommand">
+            <td>{{commande.numero}}</td>
+            <td>{{commande.date| date:'mediumDate'}} </td>
+            <td ng-init="getPrice(commande)">   {{commande.prix| currency:"€"}}</td>
+        </tr>
+    </table>
+    -->
+</div>

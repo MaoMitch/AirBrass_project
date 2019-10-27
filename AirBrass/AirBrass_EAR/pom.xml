@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>AirBrass_parent</artifactId>
+        <groupId>fr.afcepf.al30</groupId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>AirBrass_EAR</artifactId>
+
+    <packaging>ear</packaging>
+    <name>AirBrass_EAR</name>
+    <dependencies>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>AirBrass_Business</artifactId>
+            <version>${project.parent.version}</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>AirBrass_ServiceRest</artifactId>
+            <version>${project.parent.version}</version>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+                <configuration>
+                    <generateApplicationXml>true</generateApplicationXml>
+                    <!--<includeJar>false</includeJar>-->
+                    <!--<defaultLibBundleDir>lib</defaultLibBundleDir>-->
+                    <modules>
+                        <ejbModule>
+                            <groupId>${project.parent.groupId}</groupId>
+                            <artifactId>AirBrass_Business</artifactId>
+                            <bundleFileName>AirBrass_Business.jar</bundleFileName>
+                        </ejbModule>
+                        <webModule>
+                            <groupId>${project.parent.groupId}</groupId>
+                            <artifactId>AirBrass_ServiceRest</artifactId>
+                            <bundleFileName>AirBrass_ServiceRest.war</bundleFileName>
+                        </webModule>
+                    </modules>
+                    <version>7</version>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>1.1.0.Final</version>
+                <configuration>
+                    <hostname>localhost</hostname>
+                    <port>9990</port>
+                    <username>jboss-local-admin</username>
+                    <password>jboss-local-admin-password</password>
+                    <jboss-home>C:\serveur\jboss-eap-7.0-Airbrass</jboss-home>
+                    <name>${project.build.finalName}.${project.packaging}</name>
+                </configuration>
+                <executions>
+                    <!--Undeploy the application on verify-->  
+                    <execution>
+                        <id>undeploy</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>undeploy</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingDeployment>true</ignoreMissingDeployment>
+                        </configuration>
+                    </execution>
+
+                    <!--Deploy the application on install--> 
+                    <execution>
+                        <id>deploy</id>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>AirBrass_EAR</finalName>
+    </build>
+</project>

@@ -1,0 +1,84 @@
+<div style="background-image: url(/images/pan_lead_guitar.jpg); height: 100px;text-align: center;">
+   <div>
+        <div>
+            <h2 style="color: white; float: left; padding: 12px" >Formation</h2>
+        </div>
+        <div>
+         <h4 style="color: white; float: right; padding: 30px"><a href="#!/">Home</a><label>/</label>Formation</h4>
+        </div>
+    </div>   
+    
+</div>
+
+<div ng-init="onInit()">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+            <form class="navbar-form navbar-left" >
+
+                <div class="form-group"> 
+                    <select  ng-model='search.formateur.nom'>
+                        <option value="">---Choisir un formateur---</option>
+                        <option ng-repeat="formateur in listeAllFormateurs">{{formateur.nom}}</option>
+                    </select>
+                    <select  ng-model='search.niveau'>
+                        <option value="">---Choisir un niveau---</option>
+                        <option value="TOUTNIVEAU">Tout niveau</option>
+                        <option value="DEBUTANT">Débutant</option>
+                        <option value="CONFIRME">Confirmé</option>
+                        <option value="EXPERT">Expert</option>
+                    </select>
+
+                    <input type="text" placeholder="intitulé de la formation" ng-model="search.intitule">
+                </div>
+            </form>	  
+
+
+        </div>
+    </nav>   
+
+    <table class="table table-striped" ng-if="listeTableau" forms="listeTableau">
+        <thead>
+            <tr>
+                <th style="width:auto;">Intitulé
+                </th>
+                <th style="width:auto;">Date
+                </th>
+                <th style="width:auto;">Heure
+                </th>
+                <th style="width:auto;">Formateur
+                </th>
+                <th style="width:auto;">Niveau
+                </th>
+                <th style="width:auto;">Prix
+                </th>
+                <th style="width:auto;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="f in listeTableau | filter:search">
+
+                <td>{{f.intitule}}</td>
+                <td>{{f.date| date:'dd/MM/yyyy'}}</td>
+                <td>{{f.date| date:'HH:mm'}}</td>
+                <td>{{f.formateur.nom}}</td>
+                <td>{{f.niveau}}</td>
+                <td> {{f.prix| currency:""}} €</td>
+                <td><button type="submit" class="btn btn-default" ng-click="reserverFormation(f.id)" 
+                            ng-show="f.disponibilite == 'DISPONIBLE' ? true : false" >Réserver</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+    <div class="prdt"> 
+
+
+
+        <div class="clearfix"></div>
+    </div>   
+</div>

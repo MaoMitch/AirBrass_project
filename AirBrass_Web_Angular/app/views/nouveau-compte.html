@@ -1,0 +1,47 @@
+<div class="register">
+    <div class="register-top heading">
+        <h2>Nouvel Utilisateur</h2>
+    </div>
+    <div class="register-main">
+        <div class="col-md-5 account-left">
+            <input placeholder="Prénom" type="text" tabindex="1" required ng-model="prenom">
+            <input placeholder="Nom" type="text" tabindex="2" required ng-model="nom">
+            <input placeholder="Date de naissance" type="text" tabindex="2" ng-model="dateNaissance">
+            <input placeholder="Télephone" type="text" tabindex="2" ng-model="telephone">
+            <div class="row">
+                <div class="col-sm-3">
+                    <input placeholder="N°" type="text" tabindex="4" ng-model="numero">
+                </div>
+                <div class="col-sm-8">
+                    <input placeholder="Rue" type="text" tabindex="4" ng-model="rue">
+                </div>
+
+            </div>
+
+            <input placeholder="Complément" type="text" tabindex="4" ng-model="complement">
+            <div class="row">
+                <div class="col-sm-3">
+                    <input placeholder="CP" type="text" tabindex="4" ng-model="codePostal">
+                </div>
+                <div class="col-sm-8">
+                    <input placeholder="Ville" type="text" tabindex="4" ng-model="ville">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-6 account-left">
+            <input placeholder="Email" type="text" tabindex="3" required ng-model="email">
+            
+            <input placeholder="mot-de passe" type="password" tabindex="4" required ng-model="mdp">
+
+            <input placeholder="Confirmer mot-de passe" type="password" tabindex="4" required ng-model="mdpConfirm">
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+    <div class="address submit">
+        <button ng-click="newUser()">Valider</button>
+    </div>
+</div>
+

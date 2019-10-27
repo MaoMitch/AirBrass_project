@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://banque.al30.afcepf.fr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServiceBanqueService" targetNamespace="http://banque.al30.afcepf.fr">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://banque.al30.afcepf.fr" elementFormDefault="unqualified" targetNamespace="http://banque.al30.afcepf.fr" version="1.0">
+
+  <xs:element name="carteExiste" type="tns:carteExiste"/>
+
+  <xs:element name="carteExisteResponse" type="tns:carteExisteResponse"/>
+
+  <xs:element name="crediterCarte" type="tns:crediterCarte"/>
+
+  <xs:element name="crediterCarteResponse" type="tns:crediterCarteResponse"/>
+
+  <xs:element name="debiterCarte" type="tns:debiterCarte"/>
+
+  <xs:element name="debiterCarteResponse" type="tns:debiterCarteResponse"/>
+
+  <xs:element name="verifiersolde" type="tns:verifiersolde"/>
+
+  <xs:element name="verifiersoldeResponse" type="tns:verifiersoldeResponse"/>
+
+  <xs:complexType name="carteExiste">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="carteJson" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="carteExisteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="returnCarteExiste" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="debiterCarte">
+    <xs:sequence>
+      <xs:element name="sommeadebiter" type="xs:double"/>
+      <xs:element minOccurs="0" name="carteADebiter" type="xs:string"/>
+      <xs:element minOccurs="0" name="compteACrediter" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="debiterCarteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EtatOperationDebit" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="crediterCarte">
+    <xs:sequence>
+      <xs:element name="sommeacrediter" type="xs:double"/>
+      <xs:element minOccurs="0" name="carteACrediter" type="xs:string"/>
+      <xs:element minOccurs="0" name="compteADebiter" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="crediterCarteResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EtatOperationCredit" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="verifiersolde">
+    <xs:sequence>
+      <xs:element name="sommeadebite" type="xs:double"/>
+      <xs:element minOccurs="0" name="carteJson" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="verifiersoldeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="validitesolde" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="carteExiste">
+    <wsdl:part element="tns:carteExiste" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="debiterCarteResponse">
+    <wsdl:part element="tns:debiterCarteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="crediterCarteResponse">
+    <wsdl:part element="tns:crediterCarteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="verifiersolde">
+    <wsdl:part element="tns:verifiersolde" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="debiterCarte">
+    <wsdl:part element="tns:debiterCarte" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="carteExisteResponse">
+    <wsdl:part element="tns:carteExisteResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="crediterCarte">
+    <wsdl:part element="tns:crediterCarte" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="verifiersoldeResponse">
+    <wsdl:part element="tns:verifiersoldeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="banque">
+    <wsdl:operation name="carteExiste">
+      <wsdl:input message="tns:carteExiste" name="carteExiste">
+    </wsdl:input>
+      <wsdl:output message="tns:carteExisteResponse" name="carteExisteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="debiterCarte">
+      <wsdl:input message="tns:debiterCarte" name="debiterCarte">
+    </wsdl:input>
+      <wsdl:output message="tns:debiterCarteResponse" name="debiterCarteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crediterCarte">
+      <wsdl:input message="tns:crediterCarte" name="crediterCarte">
+    </wsdl:input>
+      <wsdl:output message="tns:crediterCarteResponse" name="crediterCarteResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifiersolde">
+      <wsdl:input message="tns:verifiersolde" name="verifiersolde">
+    </wsdl:input>
+      <wsdl:output message="tns:verifiersoldeResponse" name="verifiersoldeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceBanqueServiceSoapBinding" type="tns:banque">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="carteExiste">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="carteExiste">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="carteExisteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="debiterCarte">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="debiterCarte">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="debiterCarteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="crediterCarte">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="crediterCarte">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="crediterCarteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifiersolde">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="verifiersolde">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="verifiersoldeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceBanqueService">
+    <wsdl:port binding="tns:ServiceBanqueServiceSoapBinding" name="ServiceBanquePort">
+      <soap:address location="http://192.168.102.196:8080/AirBrass_Banque/services/serviceBanque"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

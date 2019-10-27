@@ -1,0 +1,46 @@
+
+    <div style="margin-top: 20px;margin-bottom: 20px" ng-init="getAllCarteByUser()">
+
+        <div class="account-top-top heading" style="text-align: center;; margin-bottom: 10px">
+            <h2>Paiement</h2>
+        </div>
+        <div class="clearfix"></div>
+        <div>
+
+            <div class="col-md-1 account-left"></div>
+            <div class="col-md-4 account-left">
+                <div ng-click="renewCarte()" style="border: 1px solid lightgray; margin: 5px; padding: 5px;">
+                    <div>Nouvelle carte</div>
+                    <div style="color: gray">Numero</div>
+                </div>
+                <div ng-repeat="carte in cartes" ng-click="getData(carte)" style="border: 1px solid lightgray; margin: 5px; padding: 5px;">
+                    <div>{{carte.intitule}}</div>
+                    <div style="color: gray">#### #### #### {{carte.numero | limitTo :16:12}}</div>
+                </div>
+                <img class="img-responsive zoom-img" src="images/Logo_CB-1.png" alt="">
+            </div>
+            <div class="col-md-1 account-left"></div>
+            <div class="col-md-4 account-left account-right">
+                <input placeholder="Nom de la carte" type="text" tabindex="1" ng-model="carte.intitule">
+                <input placeholder="Nom du propriétaire" type="text" tabindex="2" ng-model="carte.identite">
+                <input placeholder="Numéro" type="text" tabindex="3" ng-model="afficheNumero">
+                <div style="margin-bottom: 5px">
+                    <span>Date de fin de validité : </span>
+                    <select class="form-control" style="width: auto;display: inline!important;" ng-model="mois" ng-options="X for X in listMois"></select>
+                    <select class="form-control" ng-model="annee" style="width: auto;display: inline!important;" ng-init='annee = annees[0]' ng-options="X for X in annees"></select>
+                </div>
+                <input placeholder="cle" type="text" tabindex="5" ng-model="carte.cle">
+                <div >
+                <div class="submit-btn" style="display: inline!important; padding-right: 20px">
+                        <input  type="submit" ng-click="validerPaiement()" value="Valider"></input>
+                    </div>
+                    <input type="checkbox" ng-model="enregistrerCarte"> <span>Enregistrer la carte</span>
+                    
+                </div>
+            </div>
+            <div class="col-md-1 account-right"></div>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>

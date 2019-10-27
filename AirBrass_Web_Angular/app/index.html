@@ -1,0 +1,213 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>AirBrass : Vos Meilleures Air Guitares</title>
+  <link href="styles/style.css" rel="stylesheet" type="text/css" media="all" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="Luxury Watches Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+  <link href="styles/memenu.css" rel="stylesheet" type="text/css" media="all" />
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+  <link href="styles/jquery.snippet.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles/main.css">
+  <base href="/">
+</head>
+
+
+
+<body ng-app="airBrassWebAngularApp"  ng-cloak>
+
+  <!-- Add your site or application content here -->
+  <div class="container" ng-controller="MainCtrl" style="background-color: white!important">
+    <div class="header">
+      <div id="test"  class="row" style="background-color : black; height:70px; padding : 20px;" >
+        <div class="col-md-3 header-right" > 
+          <div class="search-bar">
+            <input style="background-color: white" type="text" value="Recherche" onfocus="this.value = '';" onblur="if (this.value === '') {
+              this.value = 'Recherche';
+            }">
+            <input type="submit" value="">
+          </div>
+        </div>
+        <div class="col-md-5" style="color : white;"></div>
+                 
+                        <md-menu   md-offset="10 40" class="col-md-2" style="color : white;" ng-init="initDropDownCompte()">    
+                          <md-button aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" >  
+
+                            <span class="glyphicon glyphicon-share"></span>
+                            <a href="/#!/connection"  >
+                                <span id="btnCompteConnect" style="color:white;" >{{monCompte}}</span>
+                            </a>
+                            
+                          </md-button>
+                          <md-menu-content width="2" ng-mouseleave="$mdMenu.close()">
+
+                            <md-menu-item ng-if="showSeConnecter()">
+                              <md-button  style="color : black;" id="btnConnect"  ng-href="/#!/connection">
+                                Se Connecter
+                              </md-button>
+                            </md-menu-item>
+
+                            <md-menu-item  ng-if="showAdmin()">
+                              <md-button style="color : black;"  id="btnAdmin"  ng-click="goToAdmin()">
+                                Admin
+                              </md-button>
+                            </md-menu-item>
+
+                            <md-menu-item  ng-if="showMonCompte()">
+                              <md-button  style="color : black;" id="btnMonCompte"  ng-click="goToCompte()">
+                                Mon Compte
+                              </md-button>
+                            </md-menu-item>
+
+                            <md-menu-item  ng-if="showSeDeconnecter()">
+                              <md-button  style="color : black;" id="btnDeco"  ng-click="disconnect()">
+                                Déconnexion
+                              </md-button>
+                            </md-menu-item>
+                            
+                          </md-menu-content>
+                        </md-menu>
+                                        
+        <div class="col-md-2" style="color : black; text-align: center">
+          <div class="cart box_1">
+            <a href="/#!/panier">
+              <div class="total">
+                <span >{{totalPanier | currency:''}}</span>€
+              </div>
+              <img src="images/cart-1.png" alt="" />
+            </a>
+            <p><a href="/#!/panier" style="color:white;">{{nbArticles}}</a></p>
+            <div class="clearfix" ng-init="displayPanier()"> </div>
+          </div>
+        </div>
+      </div>
+      <!--top-header-->
+      <!--start-logo-->
+      <div class="logo">
+        <a href="/#!/"><h1>AirBrass</h1></a>
+        <div class="top-nav">
+          <ul class="memenu skyblue"><li class="active"><a href="/#!/">Home</a></li>
+            <li class="grid"><a href="/#!/guitare">Guitares</a>
+            </li>
+            <li class="grid"><a href="/#!/accessoire">Accessoires</a>
+            </li>
+            <li class="grid"><a href="/#!/formation">Formation</a>
+            </li>
+            <li class="grid"><a href="/#!/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!--start-logo-->
+      
+    </div>
+
+
+    <div ng-view="" autoscroll="true">
+      
+    </div>
+    <div class="footer">
+      <div class="information">
+        <div class="infor-top">
+          <div class="col-md-3 infor-left">
+            <h3>Suivez-nous</h3>
+            <ul>
+              <li><a href="#"><span class="fb"></span><h6>Facebook</h6></a></li>
+              <li><a href="#"><span class="twit"></span><h6>Twitter</h6></a></li>
+              <li><a href="#"><span class="google"></span><h6>Google+</h6></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 infor-left">
+            <h3>Informations</h3>
+            <ul>
+              <li><a href="#"><p>Nouveaux Produits</p></a></li>
+              <li><a href="#"><p>Nos Magasins</p></a></li>
+              <li><a href="contact.html"><p>Contactez-nous</p></a></li>
+              <li><a href="#"><p>Meilleures Ventes</p></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 infor-left">
+            <h3>Mon Compte</h3>
+            <ul>
+              <li><a href="account.html"><p>Mon compte</p></a></li>
+              <li><a href="#"><p>Mes retours</p></a></li>
+              <li><a href="#"><p>Mes infos personnelles</p></a></li>
+              <li><a href="#"><p>Mes Adresses</p></a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 infor-left">
+            <h3>Infos Magasin</h3>
+            <h4>AirBrass,
+              <span>5 Boulevard du Général de Gaulle</span>
+              Montrouge 92120</h4>
+              <h5>+331 759 278 93</h5>
+              <p><a href="mailto:example@email.com">contact@airbrass.com</a></p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.js"></script>
+	<script src="bower_components/angular-material/angular-material.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+ 
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/accessoire.js"></script>
+  <script src="scripts/controllers/compte.js"></script>
+  <script src="scripts/controllers/panier.js"></script>
+  <script src="scripts/controllers/connection.js"></script>
+  <script src="scripts/controllers/confirmation.js"></script>
+  <script src="scripts/controllers/contact.js"></script>
+  <script src="scripts/controllers/identifiant.js"></script>
+  <script src="scripts/controllers/formation.js"></script>
+  <script src="scripts/controllers/guitare.js"></script>
+  <script src="scripts/controllers/livraison.js"></script>
+  <script src="scripts/controllers/nouveau-compte.js"></script>
+  <script src="scripts/controllers/article.js"></script>
+  <script src="scripts/services/serviceutilisateur.js"></script>
+  <script src="scripts/services/serviceguitare.js"></script>
+  <script src="scripts/services/serviceproduit.js"></script>
+  <script src="scripts/services/serviceaccessoire.js"></script>
+  <script src="scripts/services/servicecomande.js"></script>
+  <script src="scripts/controllers/paiement.js"></script>
+  <script src="scripts/services/servicetransfert.js"></script>
+  <script src="scripts/services/servicepaiement.js"></script>
+  <script src="scripts/services/serviceformation.js"></script>
+  <script src="scripts/controllers/erreurcommande.js"></script>
+  <script src="scripts/controllers/admin.js"></script>
+  <script src="scripts/vendor/checklist-model.js"></script>
+  <script src="scripts/vendor/angular-ui.js"></script>
+  <script src="scripts/controllers/ajoutproduit.js"></script>
+  <script src="scripts/controllers/historiquecommande.js"></script>
+  <script src="scripts/controllers/compteclientavis.js"></script>
+  <script src="scripts/controllers/compteclient.js"></script>
+  <script src="scripts/controllers/compteclientinfo.js"></script>
+  <!-- endbuild -->
+</body>
+</html>

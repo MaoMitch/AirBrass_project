@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cxf="http://cxf.apache.org/jaxws"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://cxf.apache.org/jaxws
+	http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="springData.xml"/>
+	<bean id="toto" 
+		  class="fr.afcepf.al30.ws.GestionStock">
+		<property name="daoProduit" ref="daoProduit" />
+	</bean>
+	
+	<bean id="toto2" 
+		  class="fr.afcepf.al30.ws.GestionStockIHM">
+		<property name="daoProduit" ref="daoProduit" />
+		<property name="daoUtilisateur" ref="daoUtilisateur"/>
+		<property name="daoCommande" ref="daoCommande"/>
+		<property name="daoFournisseur" ref="daoFournisseur"/>
+	</bean>
+	<cxf:endpoint id="monService"
+				  address="/serviceStock"
+				  implementor="#toto"/>
+	<cxf:endpoint id="monService2" address="/serviceStockIHM" implementor="#toto2"></cxf:endpoint>
+<!-- 				  http://localhost:48080/AirBrass_StockWS/services/serviceStock?wsdl -->
+</beans>

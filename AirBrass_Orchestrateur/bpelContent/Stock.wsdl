@@ -1,0 +1,538 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://airbrass.stock.al30.afcepf.fr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="GestionStockService" targetNamespace="http://airbrass.stock.al30.afcepf.fr">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://airbrass.stock.al30.afcepf.fr" elementFormDefault="unqualified" targetNamespace="http://airbrass.stock.al30.afcepf.fr" version="1.0">
+
+  <xs:element name="addCommande" type="tns:addCommande"/>
+
+  <xs:element name="addCommandeResponse" type="tns:addCommandeResponse"/>
+
+  <xs:element name="addLigne" type="tns:addLigne"/>
+
+  <xs:element name="addLigneResponse" type="tns:addLigneResponse"/>
+
+  <xs:element name="ajoutStock" type="tns:ajoutStock"/>
+
+  <xs:element name="ajoutStockResponse" type="tns:ajoutStockResponse"/>
+
+  <xs:element name="checkStock" type="tns:checkStock"/>
+
+  <xs:element name="checkStockResponse" type="tns:checkStockResponse"/>
+
+  <xs:element name="commandeDTO" type="tns:commandeDTO"/>
+
+  <xs:element name="decrementeStock" type="tns:decrementeStock"/>
+
+  <xs:element name="decrementeStockResponse" type="tns:decrementeStockResponse"/>
+
+  <xs:element name="fournisseurDTO" type="tns:fournisseurDTO"/>
+
+  <xs:element name="getAllProduit" type="tns:getAllProduit"/>
+
+  <xs:element name="getAllProduitResponse" type="tns:getAllProduitResponse"/>
+
+  <xs:element name="getLigneByCommande" type="tns:getLigneByCommande"/>
+
+  <xs:element name="getLigneByCommandeResponse" type="tns:getLigneByCommandeResponse"/>
+
+  <xs:element name="getListeCommande" type="tns:getListeCommande"/>
+
+  <xs:element name="getListeCommandeResponse" type="tns:getListeCommandeResponse"/>
+
+  <xs:element name="getProduitById" type="tns:getProduitById"/>
+
+  <xs:element name="getProduitByIdResponse" type="tns:getProduitByIdResponse"/>
+
+  <xs:element name="ligneCommandeDTO" type="tns:ligneCommandeDTO"/>
+
+  <xs:element name="majCommande" type="tns:majCommande"/>
+
+  <xs:element name="majCommandeResponse" type="tns:majCommandeResponse"/>
+
+  <xs:element name="produitDTO" type="tns:produitDTO"/>
+
+  <xs:element name="produitsStockVide" type="tns:produitsStockVide"/>
+
+  <xs:element name="produitsStockVideResponse" type="tns:produitsStockVideResponse"/>
+
+  <xs:element name="trouverUtilisateur" type="tns:trouverUtilisateur"/>
+
+  <xs:element name="trouverUtilisateurResponse" type="tns:trouverUtilisateurResponse"/>
+
+  <xs:element name="utilisateurDTO" type="tns:utilisateurDTO"/>
+
+  <xs:complexType name="getLigneByCommande">
+    <xs:sequence>
+      <xs:element name="idCommande" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getLigneByCommandeResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listeLigneCommande" type="tns:ligneCommandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ligneCommandeDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element name="quantite" type="xs:int"/>
+      <xs:element minOccurs="0" name="commande" type="tns:commandeDTO"/>
+      <xs:element minOccurs="0" name="produit" type="tns:produitDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="commandeDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="user" type="tns:utilisateurDTO"/>
+      <xs:element minOccurs="0" name="statut" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="utilisateurDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="login" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+      <xs:element minOccurs="0" name="name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="produitDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="refProduit" type="xs:string"/>
+      <xs:element name="stock" type="xs:int"/>
+      <xs:element name="seuil" type="xs:int"/>
+      <xs:element minOccurs="0" name="fournisseur" type="tns:fournisseurDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="fournisseurDTO">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"/>
+      <xs:element minOccurs="0" name="libelle" type="xs:string"/>
+      <xs:element minOccurs="0" name="adresseMail" type="xs:string"/>
+      <xs:element minOccurs="0" name="telephone" type="xs:string"/>
+      <xs:element minOccurs="0" name="adresse" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="decrementeStock">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commande" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="decrementeStockResponse">
+    <xs:sequence>
+      <xs:element name="decrement" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="produitsStockVide">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="produitsStockVideResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listeProduitStockVide" type="tns:produitDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStock">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commande" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="checkStockResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="listeArticle" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getListeCommande">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getListeCommandeResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listeCommande" type="tns:commandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addCommande">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commande" type="tns:commandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addCommandeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commandeAjout" type="tns:commandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addLigne">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ligne" type="tns:ligneCommandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="addLigneResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ligneAjout" type="tns:ligneCommandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAllProduit">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllProduitResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="listeProduit" type="tns:produitDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProduitById">
+    <xs:sequence>
+      <xs:element name="idProduit" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProduitByIdResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="produitDTO" type="tns:produitDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ajoutStock">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="produit" type="tns:produitDTO"/>
+      <xs:element name="quantite" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ajoutStockResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ajout" type="tns:produitDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="trouverUtilisateur">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="login" type="xs:string"/>
+      <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="trouverUtilisateurResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="utilisateur" type="tns:utilisateurDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="majCommande">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commande" type="tns:commandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="majCommandeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="commandeValide" type="tns:commandeDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getLigneByCommande">
+    <wsdl:part element="tns:getLigneByCommande" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="decrementeStock">
+    <wsdl:part element="tns:decrementeStock" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListeCommandeResponse">
+    <wsdl:part element="tns:getListeCommandeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="majCommandeResponse">
+    <wsdl:part element="tns:majCommandeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="produitsStockVide">
+    <wsdl:part element="tns:produitsStockVide" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProduitByIdResponse">
+    <wsdl:part element="tns:getProduitByIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkStockResponse">
+    <wsdl:part element="tns:checkStockResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkStock">
+    <wsdl:part element="tns:checkStock" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getListeCommande">
+    <wsdl:part element="tns:getListeCommande" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCommande">
+    <wsdl:part element="tns:addCommande" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCommandeResponse">
+    <wsdl:part element="tns:addCommandeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="trouverUtilisateurResponse">
+    <wsdl:part element="tns:trouverUtilisateurResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getLigneByCommandeResponse">
+    <wsdl:part element="tns:getLigneByCommandeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addLigne">
+    <wsdl:part element="tns:addLigne" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllProduit">
+    <wsdl:part element="tns:getAllProduit" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllProduitResponse">
+    <wsdl:part element="tns:getAllProduitResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProduitById">
+    <wsdl:part element="tns:getProduitById" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="decrementeStockResponse">
+    <wsdl:part element="tns:decrementeStockResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addLigneResponse">
+    <wsdl:part element="tns:addLigneResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ajoutStock">
+    <wsdl:part element="tns:ajoutStock" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="produitsStockVideResponse">
+    <wsdl:part element="tns:produitsStockVideResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ajoutStockResponse">
+    <wsdl:part element="tns:ajoutStockResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="trouverUtilisateur">
+    <wsdl:part element="tns:trouverUtilisateur" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="majCommande">
+    <wsdl:part element="tns:majCommande" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="stock">
+    <wsdl:operation name="getLigneByCommande">
+      <wsdl:input message="tns:getLigneByCommande" name="getLigneByCommande">
+    </wsdl:input>
+      <wsdl:output message="tns:getLigneByCommandeResponse" name="getLigneByCommandeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="decrementeStock">
+      <wsdl:input message="tns:decrementeStock" name="decrementeStock">
+    </wsdl:input>
+      <wsdl:output message="tns:decrementeStockResponse" name="decrementeStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="produitsStockVide">
+      <wsdl:input message="tns:produitsStockVide" name="produitsStockVide">
+    </wsdl:input>
+      <wsdl:output message="tns:produitsStockVideResponse" name="produitsStockVideResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkStock">
+      <wsdl:input message="tns:checkStock" name="checkStock">
+    </wsdl:input>
+      <wsdl:output message="tns:checkStockResponse" name="checkStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListeCommande">
+      <wsdl:input message="tns:getListeCommande" name="getListeCommande">
+    </wsdl:input>
+      <wsdl:output message="tns:getListeCommandeResponse" name="getListeCommandeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCommande">
+      <wsdl:input message="tns:addCommande" name="addCommande">
+    </wsdl:input>
+      <wsdl:output message="tns:addCommandeResponse" name="addCommandeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLigne">
+      <wsdl:input message="tns:addLigne" name="addLigne">
+    </wsdl:input>
+      <wsdl:output message="tns:addLigneResponse" name="addLigneResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllProduit">
+      <wsdl:input message="tns:getAllProduit" name="getAllProduit">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllProduitResponse" name="getAllProduitResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProduitById">
+      <wsdl:input message="tns:getProduitById" name="getProduitById">
+    </wsdl:input>
+      <wsdl:output message="tns:getProduitByIdResponse" name="getProduitByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ajoutStock">
+      <wsdl:input message="tns:ajoutStock" name="ajoutStock">
+    </wsdl:input>
+      <wsdl:output message="tns:ajoutStockResponse" name="ajoutStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="trouverUtilisateur">
+      <wsdl:input message="tns:trouverUtilisateur" name="trouverUtilisateur">
+    </wsdl:input>
+      <wsdl:output message="tns:trouverUtilisateurResponse" name="trouverUtilisateurResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="majCommande">
+      <wsdl:input message="tns:majCommande" name="majCommande">
+    </wsdl:input>
+      <wsdl:output message="tns:majCommandeResponse" name="majCommandeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GestionStockServiceSoapBinding" type="tns:stock">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getLigneByCommande">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getLigneByCommande">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getLigneByCommandeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="decrementeStock">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="decrementeStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="decrementeStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="produitsStockVide">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="produitsStockVide">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="produitsStockVideResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkStock">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getListeCommande">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getListeCommande">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getListeCommandeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCommande">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addCommande">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addCommandeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLigne">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="addLigne">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addLigneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllProduit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllProduit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllProduitResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProduitById">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getProduitById">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProduitByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ajoutStock">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="ajoutStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ajoutStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="trouverUtilisateur">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="trouverUtilisateur">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="trouverUtilisateurResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="majCommande">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="majCommande">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="majCommandeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GestionStockService">
+    <wsdl:port binding="tns:GestionStockServiceSoapBinding" name="GestionStockPort">
+      <soap:address location="http://192.168.102.196:18080/AirBrass_StockWS/services/serviceStock"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

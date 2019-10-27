@@ -1,0 +1,33 @@
+<div style="text-align: center; padding: 0% 10% 0% 10%;" ng-controller="CompteClientInfoCtrl" ng-init="onInit()"><h3 class="side-contenu-title">Modifier les informations de {{user.prenom}} {{user.nom}}</h3>
+<form name="compteclient">
+
+    <div layout-gt-sm="row">
+        <md-input-container>
+            <label>Adresse</label>
+            <input ng-model="user.adresse"> 
+        </md-input-container>
+    </div>
+    <div layout-gt-sm="row">
+        <md-input-container>
+            <label>CP</label>
+            <input ng-model="user.cp"> 
+        </md-input-container>
+        <md-input-container>
+            <label>Ville</label>
+            <input ng-model="user.ville"> 
+        </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+        <md-input-container style = "padding-right:40px">
+            <label>Téléphone</label>
+            <input ng-model="user.tel"> 
+        </md-input-container>
+    </div>
+
+
+      <div>        
+        <button type="submit" class="btn btn-primary" style="float:right" ng-click="saveModif()" ng-disabled="compteclient.$invalid">Enregistrer</button>
+      </div>
+</form>
+</div>

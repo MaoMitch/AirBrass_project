@@ -1,0 +1,144 @@
+<div style="display: block">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="padding-bottom: 20px">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" ng-repeat="img in images" class="{active : (img === 0)}" data-slide-to="{{img}}"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div ng-class="{item: true, active : (img === 0)}" ng-repeat="img in images"> <img ng-Src="images/airguitar{{img}}.jpg" alt="Slide numder {{img}}">
+                <div class="container">
+                    <div class="carousel-caption"> </div>
+                </div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
+
+
+    </div>
+    <div>
+
+    </div>
+    <div class="product" > 
+        <div class="container">
+
+            <div class="col-md-3" >
+                <img class="img-responsive zoom-img" src="images/promotion1.jpg" alt="">
+            </div>
+            <div class="col-md-9 prdt-right">
+                <div class="product-one">
+                    <div ng-repeat="x in promotion" >
+                        <div class="col-md-4">
+                            <div class="product-left p-left" ng-click="openSingle(x.id)">
+                                <div class="product-main simpleCart_shelfItem" style="height: 300px">
+                                    <a href="" ng-click="openSingle(x.id)" class="mask"><img class="img-responsive zoom-img" ng-Src="{{x.photo}}" alt="" /></a>
+                                    <div class="product-bottom" style="padding-top: 20px">
+
+                                        <h3>{{x.intitule}}</h3>
+                                        <p>{{x.marque.intitule}}</p>
+                                        <div style="text-align: right;">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="srch srch1">
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'">-10%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'">-20%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'">-30%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'">-40%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'">-50%</span>
+                                    </div>
+
+                                </div>
+                                <div style="margin-top: 50px">
+
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.9|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.8|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.7|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.6|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.5|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price">Prix : <del>{{x.prix|currency:''}} €</del></span></h4>
+                                    {{x.message}}
+                                </div>
+
+                            </div>
+                            <div style="text-align: center">
+
+                                <div class="submit-btn">
+                                    <input type="submit" name="" value="Ajouter au panier" ng-click="addOne(x)">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="product" > 
+        <div class="container">
+
+            <div class="col-md-3" >
+               
+            </div>
+            <div class="col-md-9 prdt-right">
+                <div class="product-one">
+                    <div ng-repeat="x in promotionAccessoire" >
+                        <div class="col-md-4">
+                            <div class="product-left p-left" ng-click="openSingle(x.id)">
+                                <div class="product-main simpleCart_shelfItem" style="height: 300px">
+                                    <a href="" ng-click="openSingle(x.id)" class="mask"><img class="img-responsive zoom-img" ng-Src="{{x.photo}}" alt="" /></a>
+                                    <div class="product-bottom" style="padding-top: 30px">
+
+                                        <h3>{{x.intitule}}</h3>
+                                        <p>{{x.marque.intitule}}</p>
+                                        <div style="text-align: right;">
+
+                                        </div>
+
+                                    </div>
+                                    <div class="srch srch1">
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'">-10%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'">-20%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'">-30%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'">-40%</span>
+                                        <span ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'">-50%</span>
+
+
+
+                                    </div>
+                                    </div>
+                                     <div style="margin-top: 70px">
+
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.9|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.8|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.7|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.6|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'"><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price"><strong>{{x.prix * 0.5|currency:''}} €</strong></span><i></i></h4>
+                                    <h4 ><a class="" ng-click="addOne(x)" href="#"></a> <span class=" item_price">Prix : <del>{{x.prix|currency:''}} €</del></span></h4>
+                                   
+                                    {{x.message}}
+                                </div>
+
+
+                                </div>
+                                <div style="text-align: center;margin-top: 30px">
+
+                                    <div class="submit-btn">
+                                        <input type="submit" name="" value="Ajouter au panier" ng-click="addOne(x)">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+
+    </div>
+
+    <!-- /.carousel -->
+

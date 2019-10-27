@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:airbrass.stock.al30.afcepf.fr="http://airbrass.stock.al30.afcepf.fr" xmlns:banque.al30.afcepf.fr="http://banque.al30.afcepf.fr" xmlns:fr.afcepf.al30.airbrass.orchestrateur="fr.afcepf.al30.airbrass.orchestrateur">
+  <process name="fr.afcepf.al30.airbrass.orchestrateur:Achat">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="fr.afcepf.al30.airbrass.orchestrateur:AchatService" port="AchatPort"/>
+    </provide>
+    <invoke partnerLink="PartnerLinkBanque">
+      <service name="banque.al30.afcepf.fr:ServiceBanqueService" port="ServiceBanquePort"/>
+    </invoke>
+    <invoke partnerLink="PartnerLinkStock">
+      <service name="airbrass.stock.al30.afcepf.fr:GestionStockService" port="GestionStockPort"/>
+    </invoke>
+  </process>
+</deploy>

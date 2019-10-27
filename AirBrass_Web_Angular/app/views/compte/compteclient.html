@@ -1,0 +1,42 @@
+<div style="text-align: center; padding: 0% 10% 0% 10%;" ng-controller="CompteClientCtrl" ng-init="onInit()"><h3 class="side-contenu-title">Modifier les informations de connexion</h3>
+<form name="compteclient">
+
+    <div layout-gt-sm="row">
+        <md-input-container>
+            <label>Adresse email</label>
+            <input ng-model="user.adresseMail"> 
+        </md-input-container>
+        <md-input-container style = "padding-right:40px">
+            <label>Adresse email</label>
+            <input ng-model="user.newAdresseMail"> 
+        </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+        <md-input-container>
+            <label>Mot de passe actuel</label>
+            <input type="password" ng-model="user.password">
+        </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+        <md-input-container style = "padding-right:40px">
+            <label>Nouveau mot de passe</label>
+            <input type="password" ng-model="user.newPassword">
+        </md-input-container>
+        
+        <md-input-container>
+            <label>Nouveau mot de passe</label>
+            <input type="password" ng-model="user.newPassword2" required matcher="{{user.newPassword}}">
+            <div ng-messages="compteclient.user.newPassword2.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="matcher">Confirm Password should be same as old Password.</div>
+           </div>
+        </md-input-container>
+    </div>
+
+      <div>        
+        <button type="submit" class="btn btn-primary" style="float:right" ng-click="saveModif()" ng-disabled="compteclient.$invalid">Enregistrer</button>
+      </div>
+</form>
+</div>

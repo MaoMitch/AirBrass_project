@@ -1,0 +1,203 @@
+<div style="background-image: url(/images/pan_lead_guitar.jpg); height: 100px;text-align: center;">
+ <div>
+    <div>
+        <h2 style="color: white; float: left; padding: 12px" >Article</h2>
+    </div>
+    <div>
+       <h4 style="color: white; float: right; padding: 30px"><a href="#!/">Home</a><label>/</label>Article</h4>
+   </div>
+</div>   
+
+</div>
+<div>
+   <div ng-init="loadArticle()" ng-model="article" style="padding-top: 30px">
+       <div class="col-md-2" ></div>
+       <div class="col-md-8" >
+        <div class="sngl-top">
+            <div class="col-md-6 single-top-left">
+                <img src="{{article.photo}}" class="img-responsive" alt="" />
+
+                <!-- FlexSlider -->
+                <script src="scripts/vendor/imagezoom.js"></script>
+                <script defer src="scripts/vendor/jquery.flexslider.js"></script>
+                <link rel="stylesheet" href="styles/flexslider.css" type="text/css"
+                media="screen" />
+
+                <script>
+
+                    $(window).load(function() {
+                        $('.flexslider').flexslider({
+                            animation: "slide",
+                            controlNav: "thumbnails"
+                        });
+                    });
+                </script>
+            </div>
+            <div class="col-md-6 single-top-right">
+                <div class="single-para simpleCart_shelfItem">
+                    <h2>{{article.intitule}}</h2>
+
+                    <div class="star-on" >
+                        <div class="review" style="padding-right: 10px">
+                            <a href="#"> Avis Client </a>
+
+                        </div>
+                        <ul class="star-footer" ng-repeat="x in taille">
+                            <li><a href="#"><i> </i></a></li>
+                        </ul>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    
+                    <h5 class="item_price"><a class="" href="#"><i></i></a> <span ng-if="article.dtoPromotion"><del > <span class=" item_price">{{article.prix |currency:''}} €</span></del> <span class=" item_price">{{article.prix*0.7 |currency:''}} €</span></span>
+                                    <span ng-if="!article.dtoPromotion"><span class=" item_price">{{article.prix |currency:''}} €</span></span>
+                                </h5>
+                    <p>{{article.description}}</p>
+                    <div class="available">
+                        <!--<span>Stock : </span><span>{{article.stock}}</span>-->
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <select class="form-control" id="nb"  ng-model="nbProduit" style="display: inline; width: auto">
+                        <option value="{{x}}" ng-repeat="x in nbArticle">{{x}}</option>
+
+                    </select>
+                    <div class="submit-btn" style="display: inline" >
+                        <input type="submit" ng-controller="PanierCtrl" ng-click="addOne(article)" value="Ajouter">
+                    </div>
+                    <div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="tabs">
+        <ul class="menu_drop">
+
+            <li class="item1"><a href="#!/article"><img
+                src="images/arrow.png" alt="">Suggestions Produits</a>
+        <div style="">
+
+            <div style="">
+                <div ng-repeat="x in listeSuggestion" >
+                    <div class="col-md-4" style="display: inline-block;text-align: center;" >
+                        <div class="product-left p-left" ng-click="openSingle(x.id)">
+                            <div>
+                                <a href="" ng-click="openSingle(x.id)" class="mask"><img class="img-responsive zoom-img" ng-Src="{{x.photo}}" alt="" /></a>
+                                <div class="product-bottom" style="padding-top: 20px">
+
+
+                                    <p>{{x.marque.intitule}}</p>
+                                    <div style="text-align: right;">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div style="margin-top: 30px;height: 60px">
+                                 <h4>{{x.intitule}}</h4>
+                                 <h4 ng-if="!x.dtoPromotion"><a class="" href="#"><i></i></a> <span class=" item_price">{{x.prix |currency:''}} €</span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'DIX'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.9 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'VINGT'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.8 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'TRENTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.7 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'QUARANTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.6 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                <h4 ng-if="x.dtoPromotion.dtoEnumPromotion == 'CINQUANTE'"><a class="" href="#"><i></i></a> <span ><del > <span class=" item_price">{{x.prix |currency:''}} €</span></del> <span class=" item_price">{{x.prix*0.5 |currency:''}} €</span></span>
+                                    <span ng-if="!x.dtoPromotion"><span class=" item_price">{{x.prix |currency:''}} €</span></span>
+                                </h4>
+                                 {{x.message}}
+                            </div>
+
+                        </div>
+                        <div style="text-align: center">
+
+                        <div class="submit-btn" >
+                            <input type="submit" name="" value="Ajouter au panier" ng-click="addOne(x)">
+                        </div>
+                        
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </li>
+        </ul>
+        </div>
+    <div class="tabs" style="padding-top: 450px">
+        <ul class="menu_drop">
+
+            <li class="item1"><a href="#!/article"><img
+                src="images/arrow.png" alt="">Avis Clients {{avisClient.length}}</a>
+                <div ng-repeat="x in avisClient | filter: search | filter:q | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>{{x.dtoPersonne.nom}} {{x.dtoPersonne.prenom}}</strong> <span class="text-muted">{{x.note}}/5</span>
+                            </div>
+                            <div class="panel-body">
+                                {{x.commentaire}}
+                            </div><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div></div></li>
+                </ul>
+                <div style="text-align: center">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">Previous</a></li>
+                        <li><a class="page-link" href="" >{{currentPage+1}}/{{numberOfPages()}}</a></li>
+                        <li class="page-item"><a class="page-link" href="" ng-disabled="currentPage >= getData().length/pageSize - 1" ng-click="currentPage=currentPage+1">Next</a></li>
+                    </ul>
+                </nav>
+
+
+                <select ng-model="pageSize" id="pageSize" class="form-control" style="width: auto;display: none;">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

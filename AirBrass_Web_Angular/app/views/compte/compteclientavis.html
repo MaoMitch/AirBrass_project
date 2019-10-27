@@ -1,0 +1,21 @@
+<div  ng-controller="CompteClientAvisCtrl" ng-init="onInit()" style=" padding: 0% 10% 0% 10%;">
+    <ul>
+        <li class="item1" style="color:white;background-color: black;height:30px;"><b>&nbsp;{{avisClient.length}} Avis Clients</b>
+
+         <div ng-repeat="avis in avisClient" ng-if="avisClient != 0">
+             <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>nom du produit a remplacer</strong> <span class="text-muted">{{avis.note}}/5</span>
+                    </div>
+                    <div class="panel-body">
+                        {{avis.commentaire}}
+                    </div><!-- /panel-body -->
+                </div><!-- /panel panel-default -->
+            </div>
+         </div>
+        </li>
+        
+         <div ng-if="avisClient == null">Pas de commentaires.</div>
+    </ul>    
+</div>

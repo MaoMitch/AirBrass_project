@@ -1,0 +1,53 @@
+<div style="text-align: center; padding: 0% 10% 0% 10%;" ng-controller="AjoutproduitCtrl" ng-init="initAjoutProduit()"><h3 class="side-contenu-title">Ajouter un produit</h3>
+<form>
+
+    <div layout-gt-sm="row">
+        <md-input-container>
+            <label>Intitule</label>
+            <input ng-model="produit.intitule"> 
+        </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row">
+        <md-input-container  style = "padding-right:40px">
+        <label>Type de Produit</label>
+            <md-select ng-model="produit.specialisationProduit">
+                <md-option ng-repeat="s in listeSpecialisationProduit | orderBy : 'intitule'" value="{{s.intitule}}">
+                    {{s.intitule}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container  style = "padding-right:40px">
+        <label>Marque</label>
+            <md-select ng-model="produit.marque">
+                <md-option ng-repeat="m in listeMarque | orderBy : 'intitule'" value="{{m.intitule}}">
+                    {{m.intitule}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container  style = "padding-right:40px">
+            <label>Prix</label>
+            <input ng-model="produit.prix">
+        </md-input-container>
+
+        <md-input-container>
+            <label>Référence</label>
+            <input ng-model="produit.reference">
+        </md-input-container>
+    </div>
+
+    <md-input-container class="md-block">
+        <label>Description</label>
+        <textarea ng-model="produit.description" md-maxlength="500" rows="5" md-select-on-focus=""></textarea>
+    </md-input-container>
+    
+      <div>
+        <input class="ng-hide" id="input-file-id" multiple type="file" />
+        <label for="input-file-id" class="btn btn-primary">Ajouter photo produit</label>
+        
+        <button type="submit" class="btn btn-primary" style="float:right" ng-click="saveNouveauProduit()">Enregistrer</button>
+      </div>
+</form>
+</div>

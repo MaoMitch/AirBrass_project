@@ -1,0 +1,26 @@
+Si premier angular :
+	installer Node.js v6.10.2 LTS
+	installer git for windows version 2.12.2.2
+	npm install -g bower
+	npm install -g yo
+	npm install -g grunt-cli
+	npm install -g generator-karma
+	npm install -g generator-angular
+	
+
+//Dans l'ordre dans le fichier du projet angular :
+
+npm install express
+
+npm install grunt-karma karma karma-phantomjs-launcher karma-jasmine jasmine-core phantomjs-prebuilt --save-dev
+
+yo angular
+	-> No
+	-> No
+	-> Yes
+	
+	ne selectionner que angular-route.js
+	
+	No à tous les overrides
+	
+bower install angular-bootstrap -save

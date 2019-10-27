@@ -1,0 +1,25 @@
+<div class="account">
+    <div class="account-top heading">
+        <h2>COMPTE</h2>
+    </div>
+    <div class="account-main">
+        <div class="col-md-6 account-left">
+            <h3>Utilisateur existant</h3>
+            <div class="account-bottom">
+                <input placeholder="Email" type="text" tabindex="3"  ng-model="userLogin">
+                <input placeholder="mot de passe" type="password" tabindex="4" ng-model="userPassword">
+                <div class="address">
+                    <a class="forgot" href="forgotten-password.html">Mot-de-passe oublié?</a>
+                    <input type="submit" value="Login" onclick="" ng-click="connect()" />
+                </div>
+                <div>{{message_connection}}</div>
+            </div>
+        </div>
+        <div class="col-md-6 account-right account-left">
+            <h3>Nouvel Utilisateur? Créer un compte</h3>
+            <p>En créant un compte sur notre site, vous commander nos produits plus facilement, enregistrer plusieurs adresses de livraison, suivre vos commandes et bien plus encore.</p>
+            <a href="/#!/nouveau-compte">Créer un compte</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

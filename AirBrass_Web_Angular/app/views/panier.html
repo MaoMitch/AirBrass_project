@@ -1,0 +1,82 @@
+<div id="panier" style="margin-bottom: 30px">
+    <div class="container" ng-init=displayPanier()>
+     <div style="background-image: url(/images/pan_lead_guitar.jpg); height: 100px;text-align: center;">
+         <div>
+            <div>
+                <h2 style="color: white; float: left; padding: 12px" >Panier ({{nbArticles}}) </h2>
+            </div>
+            <div>
+               <h4 style="color: white; float: right; padding: 30px"><a href="#!/">Home</a><label>/</label>Panier</h4>
+           </div>
+       </div>   
+       
+   </div>
+   <div class="ckeckout-top">
+    <div class="cart-items">
+
+        <script>$(document).ready(function (c) {
+            $('.close1').on('click', function (c) {
+                $('.cart-header').fadeOut('slow', function (c) {
+                    $('.cart-header').remove();
+                });
+            });
+        });
+    </script>
+    <div class="in-check" >
+        <ul class="unit clearfix" style="text-align: center">
+            <li><span style="width: 2px!important"></span></li>
+            <li><span>Produit</span></li>
+            <li><span>Quantité</span></li>	
+            <li><span>Prix Unitaires</span></li>
+            
+            <li> </li>
+        </ul>
+        <ul class="cart-header clearfix" ng-repeat="prod in panier">
+            <div class="close1"> </div>
+
+            <li class="ring-in"><a href="" ng-click="openSingle(prod.id)"><img ng-Src="{{prod.photo}}" class="img-responsive" height="100" width="100" alt=""></a></li>
+            <li><span class="name" style="text-align: center">{{prod.nom}}</span></li>
+            <li><span class="cost" style="text-align: center">{{prod.quantite}}</span></li>
+            <li><span class="cost" style="text-align: center">{{prod.prix|currency:''}} €</span></li>
+            
+        </ul>
+
+        
+
+    </div>
+    
+    <div class="col-md-12" style="float:right"><div class="submit-btn"><input type="submit" ng-click="flush()" value="Vider panier"></div></h2></div>
+</div> 
+
+
+
+</div>
+<div class="col-md-4" style="float:right">
+
+
+    <div class=" cart-total">
+
+       <h5 class="continue" >Panier Total</h5>
+       <div class="price-details">
+           <h3>Details</h3>
+           <span>Total</span>
+           <span class="total1">{{total|currency:''}} €</span>
+           <span>Réductions</span>
+           <span class="total1">---</span>
+           
+           <div class="clearfix"></div>                
+       </div> 
+       <ul class="total_price">
+         <li class="last_price"> <h4>TOTAL</h4></li>  
+         <li class="last_price"><h4>{{total|currency:''}} €</h4></li>
+         <div class="clearfix"> </div>
+     </ul>
+     <div class="col-md-2"><div class="submit-btn"><input type="submit" ng-click="confirmer()" value="Valider Panier"></input></div></div>
+
+ </div>
+</div>
+
+
+
+</div>
+

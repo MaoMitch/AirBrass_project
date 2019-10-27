@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="col-md-7" ng-init="init()" style="text-align: center; ">
+    <div style="text-align: center; ">
+      <h5 class="continue" >Livraison</h5>
+
+      <div class="col-sm-8" style="float: none; text-align: center; display:inline-block;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="radio"><input type="radio" name=livraison  value="5" ng-click="livraisonNul()"><strong>Livraison à domicile : 5€</strong></div>
+
+          </div>
+          <div class="panel-body">
+            <div ng-repeat="x in adresse">
+              {{x.numero}}, {{x.rue}} {{x.dtoVille.nom}} 
+
+            </div>
+          </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+      </div>
+      <div class="col-sm-8" style="float: none; text-align: center;display:inline-block;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="radio"><input type="radio" value="0" name=livraison ng-click="livraisonNull()"><strong>Retrait en magasin : gratuit</strong></div>
+
+          </div>
+          <div class="panel-body">
+            <div ng-repeat="x in adresse">
+             Airbrass,
+             23-25 Avenue du Dr Lannelongue
+
+           </div>
+         </div><!-- /panel-body -->
+       </div><!-- /panel panel-default -->
+     </div>
+   </div>
+   
+
+ </div>
+ <div class="col-md-4" style="margin-top: 20px">
+ <div class=" cart-total" style="text-align: center">
+
+     <h5 class="continue" >Panier Total</h5>
+     <div class="price-details">
+       <h3>Details</h3>
+       <span>Total</span>
+       <span class="total1">{{total|currency:''}} €</span>
+       <span>Réductions</span>
+       <span class="total1">---</span>
+       <span>Transport</span>
+       <span class="total1">{{prixLivraison|currency:''}} €</span>
+       <div class="clearfix"></div>                
+     </div> 
+     <ul class="total_price">
+       <li class="last_price"> <h4>TOTAL</h4></li>  
+       <li class="last_price"><h4>{{total + prixLivraison |currency:''}} €</h4></li>
+       <div class="clearfix"> </div>
+     </ul>
+     <div class="col-md-2"><div class="submit-btn"><input type="submit" ng-click="confirmer()" value="Valider Panier"></input></div></div>
+
+   </div>
+   </div>
+</div>

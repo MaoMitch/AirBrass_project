@@ -1,0 +1,156 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+ 
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 100%;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 0px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+/*Generic*/
+.wrapper{
+  margin: 60px auto;
+  text-align: center;
+}
+h1{
+  margin-bottom: 1.25em;
+}
+
+/*Specific styling*/
+#content{
+  padding: 15px;
+  border: solid 1px #eee;
+  max-width: 660px;
+  margin: auto;
+  border-radius: 4px;
+}
+
+/* PAGE ADMIN */
+.layout-row {
+  height:600px!important;
+  border:3px solid black;
+  background-color: rgb(250,250,250);
+}
+
+md-sidenav.md-locked-open, 
+md-sidenav.md-locked-open.md-closed, 
+md-sidenav.md-locked-open.md-closed.md-sidenav-left, 
+md-sidenav.md-locked-open.md-closed, 
+md-sidenav.md-locked-open.md-closed.md-sidenav-right {
+  width:200px;
+  border-right: 3px solid black;
+  background-color: #337ab7;
+}
+
+md-sidenav.md-default-theme, md-sidenav, md-sidenav.md-default-theme md-content, md-sidenav md-content {
+  background-color: #337ab7;
+}
+
+.md-contenu{
+    background-color: rgb(250,250,250);
+   
+    width: 100%;
+}
+
+
+.side-menu-controller {
+  background-color: #73B6E1;
+}
+
+.side-contenu-title {
+  border:1px solid black;
+  background-color : black;
+  border-radius: 3px;
+  color : white;
+  margin-bottom: 25px;
+  height: 40px;
+  padding-top: 5px;
+}
+
+/*Compte*/
+.levelOne {
+  background-color: #000;
+  color: white;
+}
+.levelTwo {
+  background-color: #337ab7;
+  color: white;
+}
+.clickableRow {
+  cursor: pointer;
+  height:50px;
+}

@@ -1,0 +1,23 @@
+.milieu { 
+	display: flex;
+
+}
+.full {
+	width: 80%;
+	margin: auto;
+}
+.tab {
+	width: 80%;
+}
+.no-border .ui-widget-content{
+	border: none;
+}
+.top {
+	height: 20%;
+	text-align: center;
+	
+}
+
+.ui-widget,.ui-widget .ui-widget {
+    font-size: 17px !important;
+}

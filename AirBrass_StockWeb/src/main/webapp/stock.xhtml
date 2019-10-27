@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="css/stock.css" />
+
+</h:head>
+<body>
+	<h:form id="form">
+		<div class="full">
+			<div class="top">
+				<div>
+					<span style="font-size: 28px">Gestion des Stocks Airbrass</span>
+				</div>
+			</div>
+			<div class="milieu">
+				<div class="tab">
+
+					<p:tabView id="tabview" cache="true"
+						activeIndex="#{stock.activeIndex}">
+						<p:ajax event="tabChange" update=":form:tabview" />
+						<p:tab title="Stocks">
+							<p:dataTable id="tableau" value="#{stock.listeProduit}"
+								var="produit" paginator="true" rows="7"
+								paginatorPosition="bottom" editable="true"
+								sortBy="#{produit.stock/produit.seuil}" sortOrder="ascending"
+								reflow="true" style="font-size:15px; text-align: center;">
+								<p:ajax event="rowEdit" listener="#{stock.majProduit(produit)}"
+									update=":form:tabview:tableau :form:alerte"></p:ajax>
+								<p:column style="width: 32px">
+									<img src="#{produit.photo}" style="width: 30px; height: 30px" />
+								</p:column>
+								<p:column headerText="Produit" filterBy="#{produit.intitule}"
+									filterMatchMode="contains">
+									<h:outputText value="#{produit.intitule}" />
+								</p:column>
+								<p:column headerText="Référence" style="width : 80px;">
+									<h:outputText value="#{produit.refProduit}" />
+								</p:column>
+								<p:column headerText="Stock" style="width : 60px;">
+									<h:outputText value="#{produit.stock}" />
+								</p:column>
+								<p:column headerText="Seuil" style="width : 60px;">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{produit.seuil}" />
+										</f:facet>
+										<f:facet name="input">
+											<h:inputText value="#{produit.seuil}" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column style="width:32px">
+									<p:rowEditor />
+								</p:column>
+							</p:dataTable>
+						</p:tab>
+						<p:tab title="Commande">
+							<div style="display: flex;">
+								<div style="padding-right: 5px; width: 45%;">
+									<p:dataTable value="#{stock.commande}" var="commande"
+										rowKey="#{commande.id}" selectionMode="single"
+										selection="#{stock.commandeSelected}">
+										<f:facet name="header">
+										Commandes en cours
+									</f:facet>
+										<p:ajax event="rowSelect" listener="#{stock.cliqueCommande()}"
+											update="@form" />
+										<p:column headerText="N° commande">
+											<h:outputText value="#{commande.intitule}" />
+										</p:column>
+										<p:column headerText="Date Commande">
+											<h:outputText
+												value="#{commande.date.toGregorianCalendar().time}">
+												<f:convertDateTime pattern="d/MM/yyyy" />
+											</h:outputText>
+										</p:column>
+
+									</p:dataTable>
+									<p:commandButton update="@form" value="Valider Commande" action="#{stock.accepterCommande()}" rendered="#{stock.commandeSelected != null}"></p:commandButton>
+								</div>
+								<div>
+									
+										<h2>Création de bons de commandes</h2>
+
+										<p:panelGrid columns="2">
+											<span>Référence du Produit</span>
+											<p:selectOneMenu value="#{stock.idProduit}"
+												onfocus="#{stock.idProduit}" autoWidth="false"
+												style="font-size: 15px">
+												<f:selectItems value="#{stock.listeProduit}" var="produit"
+													itemLabel="#{produit.refProduit}" itemValue="#{produit.id}" />
+											</p:selectOneMenu>
+											<span>Quantité du produit</span>
+											<h:inputText value="#{stock.quantiteProduit}"
+												style="width: 40%" />
+										</p:panelGrid>
+										<br />
+										<p:commandButton action="#{stock.extend()}"
+											value="Ajouter Produit" update="@form"></p:commandButton>
+										<br />
+										<h:panelGroup
+											rendered="#{stock.lignesNewCommande.size() != 0}">
+											<h:outputText value="Récaptitulatif du bon de commande" />
+											<ui:repeat var="ligne" value="#{stock.lignesNewCommande}">
+												<ul>
+													<li>#{ligne.produit.refProduit} : #{ligne.quantite}</li>
+												</ul>
+											</ui:repeat>
+											<p:commandButton action="#{stock.validate()}"
+												value="Valider Bon" update="@form"></p:commandButton>
+										</h:panelGroup>
+								</div>
+							</div>
+						</p:tab>
+						<p:tab title="Informations Fournisseurs">
+							<p:selectOneMenu value="#{stock.idFournisseur}"
+								onfocus="#{stock.idFournisseur}" autoWidth="false">
+								<p:ajax listener="#{stock.infoProduit()}"
+									update=":form:tabview:infoFournisseur :form:tabview:produitFournisseur" />
+								<f:selectItems value="#{stock.fournisseurs}" var="fournisseur"
+									itemLabel="#{fournisseur.libelle}"
+									itemValue="#{fournisseur.id}" />
+							</p:selectOneMenu>
+
+							<p:fieldset legend="Informations">
+								<p:panelGrid columns="4" id="infoFournisseur">
+									<p:outputLabel>Fournisseur</p:outputLabel>
+									<h:outputText value="#{stock.fournisseurDetail.libelle}" />
+									<p:outputLabel>Adresse</p:outputLabel>
+									<h:outputText value="#{stock.fournisseurDetail.adresse}" />
+									<p:outputLabel>Mail</p:outputLabel>
+									<h:outputText value="#{stock.fournisseurDetail.adresseMail}" />
+									<p:outputLabel>Telephone</p:outputLabel>
+									<h:outputText value="#{stock.fournisseurDetail.telephone}" />
+								</p:panelGrid>
+							</p:fieldset>
+							<br />
+							<p:fieldset legend="Produits du fournisseur">
+								<p:dataTable value="#{stock.produitByFournisseur}" var="produit"
+									id="produitFournisseur">
+									<p:column style="height: 32px; width: 32px;">
+										<img src="#{produit.photo}" style="width: 30px; height: 30px" />
+									</p:column>
+									<p:column headerText="Produit">
+										<h:outputText value="#{produit.intitule}" />
+									</p:column>
+									<p:column headerText="Référence">
+										<h:outputText value="#{produit.refProduit}" />
+									</p:column>
+									<p:column headerText="Prix Fournisseur">
+										<h:outputText value="#{produit.prixFournisseur}">
+											<f:convertNumber type="currency" />
+										</h:outputText>
+									</p:column>
+								</p:dataTable>
+							</p:fieldset>
+						</p:tab>
+						<p:tab title="Historique Commande">
+
+
+							<p:dataTable value="#{stock.commandeValide}" var="commande" paginator="true" rows="7"
+								paginatorPosition="bottom" editable="true">
+								<f:facet name="header">Commandes livrées</f:facet>
+								<p:column headerText="Numéro Commande">
+									<h:outputText value="#{commande.intitule}" />
+								</p:column>
+								<p:column headerText="Date Commande">
+									<h:outputText
+										value="#{commande.date.toGregorianCalendar().time}">
+										<f:convertDateTime pattern="d/MM/yyyy" />
+									</h:outputText>
+								</p:column>
+								<p:column headerText="Prix">
+									<h:outputText value="#{stock.prixCommande(commande.id)}">
+										<f:convertNumber type="currency" />
+									</h:outputText>
+								</p:column>
+
+							</p:dataTable>
+
+
+
+						</p:tab>
+					</p:tabView>
+
+				</div>
+				<div class="aside">
+					<p:fieldset id="alerte" legend="Alertes Stock">
+						<ui:repeat var="produit" value="#{stock.stockVide}">
+							<ul>
+								<li>#{produit.refProduit} :
+									#{stock.alerteByProduit(produit)}</li>
+							</ul>
+						</ui:repeat>
+					</p:fieldset>
+				</div>
+			</div>
+			<div>
+				<p:commandButton action="#{stock.deconnect()}" value="déconnexion" />
+			</div>
+			<p:dataTable rendered="">
+				<p:column headerText="test"></p:column>
+			</p:dataTable>
+		</div>
+	</h:form>
+</body>
+</html>

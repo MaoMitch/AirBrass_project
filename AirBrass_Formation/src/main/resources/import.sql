@@ -1,0 +1,16 @@
+INSERT INTO ws_formateur(nom) VALUES ('Jean-Jacques');
+INSERT INTO ws_formateur(nom) VALUES ('Jean-Paul');
+INSERT INTO ws_formateur(nom) VALUES ('Mel Gibson');
+INSERT INTO ws_formateur(nom) VALUES ('Patrick R.');
+INSERT INTO ws_formateur(nom) VALUES ('Binary');
+INSERT INTO ws_formateur(nom) VALUES ('Emile');
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Guitare Yolo','2017-04-22 15:00:00', 100.0, 1, 0, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Ukuyolo','2017-04-21 16:00:00', 30.0, 1, 1, 1);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Princes of the Universe','2017-04-21 16:00:00', 200.0, 2, 2, 3);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Gamme','2017-04-23 19:00:00', 80.0, 1, 0, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Cours de guitare','2017-04-23 21:00:00', 80.0, 2, 1, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Cours de Gibson','2017-04-21 13:00:00', 20.0, 3, 1, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Cours de Gibson','2017-04-24 15:00:00', 180.0, 3, 2, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Cours de guitare','2017-04-25 19:00:00', 30.0, 4, 1, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Cours de guitare','2017-04-26 18:00:00', 40.0, 5, 2, 0);
+INSERT INTO ws_formation(intitule, date_formation, prix, formateur, niveau, disponibilite) VALUES ('Leçon de guitare','2017-04-26 19:00:00', 25.0, 4, 0, 0);
